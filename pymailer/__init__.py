@@ -1,15 +1,6 @@
-from pymailer import *
-
-
 def main():
-    # instantiate alerter object
-    alerter = SensuAlerter()
-    # alerter.read_config_file()
-    # read input
-    alerter.get_sensu_event()
-    # send email
-    # alerter.send_alert_email
+    """ this will be using the Facade which is Alerter CLass"""
+    # parse argv
 
-
-if __name__ == '__main__':
-    main()
+    # read conf
+    # send mail

@@ -9,16 +9,16 @@ class SensuEvent:
     def __init__(self):
         pass
 
-    def parse_sensu_event(self):
-        # self.EventId = get_event_data_from_stdin()["id"]
-        # self.EventAction = get_event_data_from_stdin()["action"]
-        # self.EventTimestamp = get_event_data_from_stdin()["timestamp"]
-        # self.EventOccurrences = get_event_data_from_stdin()["occurrences"]
-        pass
+    def parse_sensu_event(self, eventdata):
+        event_check_data = get_event_data(eventdata)
+        self.EventId = event_check_data["id"]
+        self.EvenAction = event_check_data["action"]
+        self.EventTimestamp = event_check_data["timestamp"]
+        self.EventOccurences = event_check_data["occurrences"]
+        return self.EventId, self.EvenAction, self.EventOccurences, self.EventTimestamp
 
 
-
-class EventEmail:
+class SensuEventEmail:
     def __init__(self, email_subject, email_recipient, email_body, email_sender):
         self.EmailSubject = email_subject
         self.EmailRecipient = email_recipient

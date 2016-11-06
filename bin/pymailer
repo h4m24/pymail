@@ -3,5 +3,10 @@
 import pymailer
 import sys
 
+test = '{    "timestamp": 1477401995,    "action": "create",    "occurrences": 1,    "check": {      "total_state_change": 11,      "history": [        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "0",        "1",        "1",        "2"      ],      "status": 2,      "output": "No keepalive sent from client for 186 seconds (>=180)",      "executed": 1477401995,      "issued": 1477401995,      "name": "keepalive",      "thresholds": {        "critical": 180,        "warning": 120      }    },    "client": {      "timestamp": 1477401809,      "version": "0.20.3",      "subscriptions": [        "nag_basic"      ],      "address": "mongo-bi-replica",      "name": "mongo-bi-replica"    },    "id": "d54a71a1-095d-4ce0-b41e-02bbdcb3dc2c"  }'
+
 if __name__ == '__main__':
-    pymailer.main(sys.argv, sys.stdin)
+    # pymailer.main(sys.argv, sys.stdin)
+    pymailer.main(sys.argv, test)
+
+

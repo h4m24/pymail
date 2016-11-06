@@ -3,6 +3,20 @@ usage
 pipe sensu event json to this and it will send you a nice report
 
 
+
+must create a pymailer.json inside bin directory to with current attributes
+
+{
+  "sender_username": "user@gmail.com",
+  "sender_password": "Passwords",
+  "sender_display_name" : "Sensu Pymailer",
+  "recipient" : "reciever@server.com",
+  "subject" : "alarm"
+}
+
+
+
+
 output of json will be converted into tables like so in here
 http://json.bloople.net/
 

@@ -1,10 +1,8 @@
-import sys
 import json
 import argparse
 
 
 def parse_alerter_arguments(arguments_list):
-    # print(arguments_list)
     parser = argparse.ArgumentParser()
     return parser.parse_args()
 

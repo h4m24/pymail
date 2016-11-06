@@ -22,10 +22,16 @@ class SensuAlerter:
         event = SensuEvent()
         return event.parse_sensu_event(eventdata)
 
-
     def send_alerter_mail(self, alerter_config, event_properties):
         # call the email sender function/class?
-        print(type(alerter_config))
-        print(type(event_properties))
-        #mailer = SensuEventEmail()
-        #pass
+        #  this is email configs - alerter_config
+        #  this is the check data - event_properties
+
+        # initiate mailer variables with the config
+        mailer = SensuEventEmail(alerter_config)
+
+        # build the email with the check data
+        mailer.build_event_email(event_properties)
+
+        # Send Mail
+        mailer.send_event_mail()

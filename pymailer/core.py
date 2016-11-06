@@ -19,17 +19,40 @@ class SensuEvent:
 
 
 class SensuEventEmail:
-    def __init__(self, email_subject, email_recipient, email_body, email_sender):
-        self.EmailSubject = email_subject
-        self.EmailRecipient = email_recipient
-        self.EmailBody = email_body
-        self.EmailSender = email_sender
+    def __init__(self, email_conf):
 
-    def get_email_configs(self):
-        pass
-        # read config from helper function
+        self.EmailSender = email_conf['sender_username']
+        self.EmailPassword = email_conf['sender_password']
+        self.EmailSubject = email_conf['subject']
+        self.EmailRecipient = email_conf['recipient']
 
-    def send_mail(self):
+    def build_event_email(self, event_properties):
+        self.EmailBody = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Sensu check</title>
+        </head>
+        <body>
+        <table style="width:150%">
+          <tr>
+            <td>Check Name:</td>
+            <td>""" + str(event_properties[0]) + """ </td>
+          </tr>
+          <tr>
+            <td>Check Status:</td>
+            <td>""" + str(event_properties[1]) + """</td>
+          </tr>
+            <tr>
+              <td>Instance Name:</td>
+              <td>""" + str(event_properties[2]) + """</td>
+            </tr>
+        </table>
+        </body>
+        </html>
+        """
+
+    def send_event_mail(self):
         # Create message container - the correct MIME type is multipart/alternative.
         msg = MIMEMultipart('alternative')
         msg['Subject'] = self.EmailSubject
@@ -45,56 +68,9 @@ class SensuEventEmail:
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.ehlo()
         s.starttls()
-        s.login('hamza.faouri@zipjet.com', 'password')
+        s.login(self.EmailSender, self.EmailPassword)
 
         # sendmail function takes 3 arguments: sender's address, recipient's address
         # and message to send - here it is sent as one string.
         s.sendmail(self.EmailSender, self.EmailRecipient, msg.as_string())
         s.quit()
-
-
-
-
-
-
-
-
-
-#
-# # get the pipe
-# sensu_event = helpers.get_stdin()
-#
-# # parse pipe
-# sensu_event_json = helpers.parse_json(helpers.list_to_string(sensu_event))
-#
-# # from here On an email will be sent for the event.
-# email_body = """
-# <!DOCTYPE html>
-# <html>
-# <head>
-# <title>Sensu check</title>
-# </head>
-# <body>
-# <table style="width:150%">
-#   <tr>
-#     <td>Check Name:</td>
-#     <td>""" + str(sensu_event_json['check']['name']) + """ </td>
-#   </tr>
-#   <tr>
-#     <td>Check Status:</td>
-#     <td>""" + str(sensu_event_json['check']['status']) + """</td>
-#   </tr>
-#     <tr>
-#       <td>Instance Name:</td>
-#       <td>""" + str(sensu_event_json['client']['name']) + """</td>
-#     </tr>
-#       <tr>
-#         <td>Check Output:</td>
-#         <td>""" + str(sensu_event_json['check']['output']) + """</td>
-#       </tr>
-# </table>
-# </body>
-# </html>
-# """
-#
-# helpers.send_mail('hamza.faouri@zipjet.com','hamza.faouri@zipjet.com',"Sensu Alarm", email_body)

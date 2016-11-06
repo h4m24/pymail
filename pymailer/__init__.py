@@ -26,10 +26,10 @@ def main(arguments_list, event_data):
     except Exception:
         print("failed to parse sensu event")
 
-    try:
+    # try:
         # send mail
         # create an object from facade class and let it send mail
         # this is expecting event properties, email config from alerter file
-        alerter.send_alerter_mail(alerter_config, event_properties)
-    except Exception:
-        print("failed to send mail")
+    alerter.send_alerter_mail(alerter_config, event_properties)
+    # except Exception:
+    #     print("failed to send mail")

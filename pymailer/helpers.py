@@ -1,5 +1,17 @@
 import sys
 import json
+import argparse
+
+
+def parse_alerter_arguments(arguments_list):
+    print(arguments_list)
+    parser = argparse.ArgumentParser()
+    return parser.parse_args()
+
+def read_alerter_conf_file(conf_file_path):
+    # open file read contents and return attributes
+    pass
+
 
 
 def get_event_data_from_stdin():
@@ -8,10 +20,8 @@ def get_event_data_from_stdin():
         with open('/tmp/pepe.json', 'r') as json_file:
             return json.load(json_file)
     except Exception:
-        print "Failed to process stdin"
+        print("Failed to process stdin")
         sys.exit(2)
-
-
 
 
 
